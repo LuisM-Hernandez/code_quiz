@@ -2,8 +2,8 @@
 var questions = [
     {
       title: "This first question is a test:",
-      choices: ["strings", "booleans", "alerts", "numbers"],
-      answer: "alerts"
+      choices: ["Strings", "Booleans", "Alerts", "Numbers"],
+      answer: "Alerts"
     },
     {
       title:"This is the second question",

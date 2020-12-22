@@ -17,9 +17,22 @@ h1 {
 }
 
 .btns{
-    background-color: #252925;
-    color: blue;
+
+    background-color: gray;
+    color: darkblue;
+    padding: 2%;
+    margin-right: 2%;
+    
 }
+
+#timer{
+    float:right
+}
+
+#button-start{
+padding: 3%;
+}
+
 
 
 
