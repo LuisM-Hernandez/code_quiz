@@ -4,18 +4,18 @@ var timerEl = document.getElementById("timer");
 var startBtn = document.getElementById("button-start");
 var questionTitle = document.getElementById("question-title");
 var choiceEl = document.getElementById("choices");
-var feedbackEL = document.getElementById("feedback")
+var feedbackEL = document.getElementById("feedback");
+var choicesBtns = document.getElementById("btn");
+
 
 var choicesArray;
 var answer;
-
 
 var questionIndex = -1;
 var secondsLeft = 200;
 
 
 startBtn.onclick = startQuiz;
-
 
 function startQuiz() {
 screen = document.getElementById("start-screen");
@@ -28,6 +28,7 @@ setTimer();
 function getQuestions(){
 
 questionIndex++;
+
 questionTitle.textContent = questions[questionIndex].title;
 choicesArray = questions[questionIndex].choices;
 correctAnswer = questions[questionIndex].answer
@@ -37,34 +38,23 @@ for (var i = 0; i < choicesArray.length; i++){
     btnCreator.textContent = choicesArray[i];
     choicesBtn = choiceEl.appendChild(btnCreator).setAttribute("class", "btns");
     
-    
+}
 
-    
-    if(correctAnswer === choicesBtn){
-      feedbackEL = ("Correct!");
-    }
+}
 
-    else{
-      feedbackEL = ("Wrong!");
-    }
-
-
-
-    //Necesito que cuando el usuario haga click en una de las opciones, compare la respuesta con
-    //la respuesta correcta y determine si esta bien o mal.
-
-
-    
-    
-
+choiceEl.addEventListener("click", function (event) {
   
+  if (correctAnswer === event.target.textContent) {   
+      feedbackEL.innerHTML = "YES!";
+     
+  } else {
+      feedbackEL.innerHTML = "WRONG.";
+
+  }    
+});
 
 
 
-
-
-}
-}
 
 
 
