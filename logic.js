@@ -1,88 +1,66 @@
-var screen = document.getElementById("start-screen");
-var questionsDisplay = document.getElementById("questions");
-var timerEl = document.getElementById("timer");
-var startBtn = document.getElementById("button-start");
-var questionTitle = document.getElementById("question-title");
-var choiceEl = document.getElementById("choices");
-var feedbackEL = document.getElementById("feedback");
-var choicesBtns = document.getElementById("btn");
+
+var startScreen = document.querySelector("#start-screen");
+var startBtn = document.querySelector("#button-start");
+var questionId = document.querySelector("#questions");
+var titleId = document.querySelector("#question-title");
+var choiceId = document.querySelector("#choices");
+var feedbackId = document.querySelector("#feedback");
+var timerId = document.querySelector("#timer");
 
 
-var choicesArray;
-var answer;
-
+var secondsLeft = 20;
 var questionIndex = -1;
-var secondsLeft = 200;
-
+var choiceArray;
 
 startBtn.onclick = startQuiz;
 
-function startQuiz() {
-screen = document.getElementById("start-screen");
-screen.setAttribute("class", "hide");
-questionsDisplay.setAttribute("class", "start");
-getQuestions();
-setTimer();
+function startQuiz(){
+  startScreen.setAttribute("class", "hide");
+  questionId.removeAttribute("class", "hide");
+
+  setTimer();
+  questionDisplay();  
 }
 
-function getQuestions(){
-
-questionIndex++;
-
-questionTitle.textContent = questions[questionIndex].title;
-choicesArray = questions[questionIndex].choices;
+function questionDisplay(){
+  questionIndex++;
+  choiceId.textContent = "";
+titleId.textContent = questions[questionIndex].title
+choiceArray = questions[questionIndex].choices
 correctAnswer = questions[questionIndex].answer
 
-for (var i = 0; i < choicesArray.length; i++){
-    var btnCreator = document.createElement("button");
-    btnCreator.textContent = choicesArray[i];
-    choicesBtn = choiceEl.appendChild(btnCreator).setAttribute("class", "btns");
-    
-}
+for (var i = 0; i < choiceArray.length; i++){
+  var choicesbtns = document.createElement("button");
+  choicesbtns.textContent = choiceArray[i];
+  choicesBtn = choiceId.appendChild(choicesbtns).setAttribute("class", "btns");
 
 }
 
-choiceEl.addEventListener("click", function (event) {
+}
+
+choiceId.addEventListener("click", function (event) {
   
   if (correctAnswer === event.target.textContent) {   
-      feedbackEL.innerHTML = "YES!";
-     
-  } else {
-      feedbackEL.innerHTML = "WRONG.";
-
-  }    
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function setTimer() {
-    var timerInterval = setInterval(function() {
-      secondsLeft--;
-      timerEl.textContent = " timer display" + secondsLeft  ;
-      if(secondsLeft === 0) {
-        clearInterval(timerInterval);
-      }
-    }, 1000);
+      feedbackId.textContent = "Correct!";
+    
+  } 
+  
+  else {
+      feedbackId.textContent = "Wrong!";
+      secondsLeft -= 5;
   }
 
+  questionDisplay();
 
-  
+});
 
-
-
-
+function setTimer() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timerId.textContent = " Time Left " + secondsLeft  ;
+    if(secondsLeft === 0 || questionIndex === questions.length) {
+      clearInterval(timerInterval);
+      setTimeout();
+    }
+  }, 1000);
+}
