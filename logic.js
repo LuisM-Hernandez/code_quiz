@@ -10,13 +10,16 @@ var endquizId = document.querySelector("#endquiz");
 var gameoverId = document.querySelector("#gameover");
 var submitBtn = document.querySelector("#submit");
 var userInput = document.querySelector("#nameInput");
-var userStored = document.querySelector("#users");
+var championName = document.querySelector("#firstchampion");
+var championScore = document.querySelector("#firstscore");
+
 
 
 var secondsLeft = 30;
 var questionIndex = -1;
 var choiceArray;
-var storedTime = 0;
+
+
 
 startBtn.onclick = startQuiz;
 
@@ -37,12 +40,8 @@ function setTimer() {
     timerId.textContent = " Time Left " + secondsLeft;
     if (secondsLeft === 0 || questionIndex === questions.length) {
       clearInterval(timerInterval);
-      console.log(secondsLeft)
       gameOver();
       getName();
-      //Need to get the time left and store it
-
-
     }
   }, 1000);
 }
@@ -84,33 +83,33 @@ function gameOver() {
 
 
 function getName() {
-  var userName = localStorage.getItem("users");
   
+  submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    
+    var userInput = document.querySelector("#nameinput")
+    
+    if (userInput === "") {
+      alert("Need a valid input");
+  
+    }
 
-  if (!userName) {
-    return;
-  }
+    var champion = {
+      user: userInput.value.trim(),
+      score: secondsLeft
+    };
+
+    localStorage.setItem("user", JSON.stringify(champion));
+    var lastChampion = JSON.parse(localStorage.getItem("user"));
+    championName.textContent = lastChampion.user;
+    championScore.textContent = lastChampion.score;
+
+  })
+ 
 
 }
 
-submitBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  
-  var userInput = document.querySelector("#nameinput").value
 
-
-  if (userInput === "") {
-    alert("Need a valid input");
-
-  }
-
-  else {
-    alert("Sucess!")
-  }
-  localStorage.setItem("Name", userInput);
-  localStorage.setItem("Score", secondsLeft);
-
-})
 
 
 
