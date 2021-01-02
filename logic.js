@@ -13,13 +13,9 @@ var userInput = document.querySelector("#nameInput");
 var championName = document.querySelector("#firstchampion");
 var championScore = document.querySelector("#firstscore");
 
-
-
 var secondsLeft = 30;
 var questionIndex = -1;
 var choiceArray;
-
-
 
 startBtn.onclick = startQuiz;
 
@@ -41,7 +37,6 @@ function setTimer() {
     if (secondsLeft === 0 || questionIndex === questions.length) {
       clearInterval(timerInterval);
       gameOver();
-      getName();
     }
   }, 1000);
 }
@@ -49,9 +44,9 @@ function setTimer() {
 function questionDisplay() {
   questionIndex++;
   choiceId.textContent = "";
-  titleId.textContent = questions[questionIndex].title
-  choiceArray = questions[questionIndex].choices
-  correctAnswer = questions[questionIndex].answer
+  titleId.textContent = questions[questionIndex].title;
+  choiceArray = questions[questionIndex].choices;
+  correctAnswer = questions[questionIndex].answer;
 
   for (var i = 0; i < choiceArray.length; i++) {
     var choicesbtns = document.createElement("button");
@@ -66,7 +61,6 @@ choiceId.addEventListener("click", function (event) {
 
   if (correctAnswer === event.target.textContent) {
     feedbackId.textContent = "Correct!";
-
   }
 
   else {
@@ -81,47 +75,22 @@ function gameOver() {
   endquizId.removeAttribute("class", "hide");
 }
 
-
-function getName() {
+submitBtn.addEventListener("click", function (event) {
+  event.preventDefault();
   
-  submitBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    
-    var userInput = document.querySelector("#nameinput")
-    
-    if (userInput === "") {
-      alert("Need a valid input");
+  var userInput = document.querySelector("#nameinput")
   
-    }
+  if (userInput === "") {
+    alert("Need a valid input");
 
-    var champion = {
-      user: userInput.value.trim(),
-      score: secondsLeft
-    };
+  }
 
-    localStorage.setItem("user", JSON.stringify(champion));
-    var lastChampion = JSON.parse(localStorage.getItem("user"));
-    championName.textContent = lastChampion.user;
-    championScore.textContent = lastChampion.score;
+  var champion = [{
+    user: userInput.value.trim(),
+    score: secondsLeft
+  }];
 
-  })
- 
+  localStorage.setItem("lastUser", JSON.stringify(champion));
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // window.open("./highscores.html");
+});
