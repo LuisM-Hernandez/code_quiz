@@ -8,9 +8,16 @@
 
 }
 
-h1 {
+.start{
     text-align: center;
 }
+
+#questions{
+    text-align: center;
+}
+
+
+
 
 .hide{
     display: none;
@@ -18,12 +25,28 @@ h1 {
 
 .btns{
 
-    background-color: gray;
-    color: darkblue;
+    background-color: #12232E;
+    color: #EEFBFB;
     padding: 2%;
     margin-right: 2%;
-    
+     border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    border-radius: 12px;
 }
+.btns:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+#endquiz{
+    text-align: center;
+}
+
 
 #timer{
     float:right

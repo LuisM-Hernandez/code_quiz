@@ -12,15 +12,14 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
 
 
-    <title>Code Quiz</title>
+    <title>Video Game Quiz</title>
 </head>
-
 <body>
 
     <div class="container-fluid">
 
         <div id="timer"></div>
-        
+
         <a class="nav-link" href="./highscores.html">Champions Hall <span class="sr-only">(current)</span></a>
         <div id="wrapper">
 
@@ -31,33 +30,27 @@
                 <button id="button-start">Start Quiz</button>
             </div>
 
-            
+
             <div id="questions" class="hide">
 
                 <h2 id="question-title"></h2>
-                
+
                 <div id="choices" class="choices"></div>
 
-                <p id = "feedback"></p>
+                <p id="feedback"></p>
             </div>
 
             <div id="endquiz" class="hide">
-
                 <h1 id="gameover">Game Over!</h1>
-
                 <label for="scorename">Name</label>
-                <input type="text" name="users" id="nameinput" placeholder="Champion"/>
+                <input type="text" name="users" id="nameinput" placeholder="Champion" />
                 <button id="submit">Submit</button>
-
-                
-
+            </div>
         </div>
-    </div>
-
-
-    <script src="./logic.js"></script>
-    <script src="./questions.js"></script>
-    <script src="./highScore.js"></script>
+        
+        <script src="./logic.js"></script>
+        <script src="./questions.js"></script>
+        <script src="./highScore.js"></script>
 
 
 

@@ -1,4 +1,3 @@
-
 var startScreen = document.querySelector("#start-screen");
 var startBtn = document.querySelector("#button-start");
 var questionId = document.querySelector("#questions");
@@ -12,25 +11,19 @@ var submitBtn = document.querySelector("#submit");
 var userInput = document.querySelector("#nameInput");
 var championName = document.querySelector("#firstchampion");
 var championScore = document.querySelector("#firstscore");
-
 var secondsLeft = 30;
 var questionIndex = -1;
 var choiceArray;
-
+//***Dan: Array for pushing high scores to later */
+var highScores = [];
 startBtn.onclick = startQuiz;
-
 function startQuiz() {
-
   startScreen.setAttribute("class", "hide");
   questionId.removeAttribute("class", "hide");
-
   setTimer();
   questionDisplay();
-
 }
-
 function setTimer() {
-
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timerId.textContent = " Time Left " + secondsLeft;
@@ -40,57 +33,47 @@ function setTimer() {
     }
   }, 1000);
 }
-
 function questionDisplay() {
   questionIndex++;
   choiceId.textContent = "";
   titleId.textContent = questions[questionIndex].title;
   choiceArray = questions[questionIndex].choices;
   correctAnswer = questions[questionIndex].answer;
-
   for (var i = 0; i < choiceArray.length; i++) {
     var choicesbtns = document.createElement("button");
     choicesbtns.textContent = choiceArray[i];
     choicesBtn = choiceId.appendChild(choicesbtns).setAttribute("class", "btns");
-
   }
-
 }
-
 choiceId.addEventListener("click", function (event) {
-
   if (correctAnswer === event.target.textContent) {
     feedbackId.textContent = "Correct!";
   }
-
   else {
     feedbackId.textContent = "Wrong!";
     secondsLeft -= 5;
   }
   questionDisplay();
 });
-
 function gameOver() {
   questionId.setAttribute("class", "hide");
   endquizId.removeAttribute("class", "hide");
 }
-
 submitBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  
   var userInput = document.querySelector("#nameinput")
-  
   if (userInput === "") {
     alert("Need a valid input");
-
   }
-
-  var champion = [{
+  // ***Dan: Changed this into an object. Removed [];
+  var champion = {
     user: userInput.value.trim(),
     score: secondsLeft
-  }];
-
-  localStorage.setItem("lastUser", JSON.stringify(champion));
-
-  // window.open("./highscores.html");
+  };
+  //***Dan: Push champion to the array */
+  highScores.push(champion);
+  localStorage.setItem("highscores", JSON.stringify(highScores));
+  // ***Dan: Redirect to highscores page
+  window.location.href=("highscores.html");
 });
+highScores = JSON.parse(window.localStorage.getItem("highscores")) || [];
