@@ -11,11 +11,16 @@ var submitBtn = document.querySelector("#submit");
 var userInput = document.querySelector("#nameInput");
 var championName = document.querySelector("#firstchampion");
 var championScore = document.querySelector("#firstscore");
+var champ = document.querySelector("#champ")
+
 var secondsLeft = 30;
 var questionIndex = -1;
 var choiceArray;
-//***Dan: Array for pushing high scores to later */
+
 var highScores = [];
+
+
+
 startBtn.onclick = startQuiz;
 function startQuiz() {
   startScreen.setAttribute("class", "hide");
@@ -65,15 +70,20 @@ submitBtn.addEventListener("click", function (event) {
   if (userInput === "") {
     alert("Need a valid input");
   }
-  // ***Dan: Changed this into an object. Removed [];
+ 
   var champion = {
     user: userInput.value.trim(),
     score: secondsLeft
   };
-  //***Dan: Push champion to the array */
+ 
   highScores.push(champion);
   localStorage.setItem("highscores", JSON.stringify(highScores));
-  // ***Dan: Redirect to highscores page
+  
   window.location.href=("highscores.html");
 });
 highScores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+
+
+
+
